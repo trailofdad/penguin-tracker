@@ -3,12 +3,12 @@
 
 ## Todo:
 
-* SAAD- Class diagram
+* <del>SAAD- Class diagram</del>
 * Validation using regular expressions
 * Writing to file
 * Reading from file 
 * Report generation
-* Use of Aggregation, Inheritance, Abstraction
+* <del>Use of Aggregation, Inheritance, Abstraction</del>
 * Implementation of exception handling (i.e. try/catch)
-* Uses a multi-parameter constructor to populate the properties of each animal type using data taken from the UI at runtime
+* <del>Uses a multi-parameter constructor to populate the properties of each animal type using data taken from the UI at runtime</del>
 * Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.
