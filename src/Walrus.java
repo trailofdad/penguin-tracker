@@ -1,7 +1,7 @@
 
 public class Walrus extends Animal{
 	
-	boolean dentalHealth = true;
+	String dentalHealth = "Good";
 	
 	Walrus(){
 		species = "Walrus";
@@ -13,12 +13,14 @@ public class Walrus extends Animal{
 		
 	}
 
-	public boolean isDentalHealth() {
+	public String getDentalHealth() {
 		return dentalHealth;
 	}
 
-	public void setDentalHealth(boolean dentalHealth) {
+	public void setDentalHealth(String dentalHealth) {
 		this.dentalHealth = dentalHealth;
 	}
 
+	
+	
 }

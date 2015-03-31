@@ -5,8 +5,12 @@ public abstract class Animal {
 	String sex = "sex";
 	double weight = 0;
 	
-	public void addCoords() {
+	Tracker animalTracker = new Tracker();
+	
+	public void addCoords(double[] lat,double[] lon) {
 		
+		this.animalTracker.setLatitude(lat);
+		this.animalTracker.setLogitude(lon);
 	}
 	
 	public abstract void newTrack();
