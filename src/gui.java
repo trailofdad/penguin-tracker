@@ -23,9 +23,16 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 
 public class gui {
+	
+	private int count = 1;
 	
 	private Penguin trackPenguin = new Penguin();
 	private Sealion trackSealion = new Sealion();
@@ -333,6 +340,8 @@ public class gui {
 				String sex = txtfSex.getText();
 				double weight = Double.parseDouble(txtfWeight.getText());
 				
+				// Validation goes here for forms
+				
 				double[] lat = {Double.parseDouble(txtfLat0.getText()), Double.parseDouble(txtfLat1.getText()), Double.parseDouble(txtfLat2.getText())};
 				double[] lon = {Double.parseDouble(txtfLong0.getText()), Double.parseDouble(txtfLong1.getText()), Double.parseDouble(txtfLong2.getText())};
 				
@@ -342,6 +351,7 @@ public class gui {
 					trackPenguin.setBloodPressure(Double.parseDouble(txtfOption.getText()));
 					trackPenguin.animalTracker.setLatitude(lat);
 					trackPenguin.animalTracker.setLogitude(lon);
+					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
 				}
 				else if(animal == "Sea Lion"){
 					trackSealion.setSex(sex);
@@ -349,6 +359,7 @@ public class gui {
 					trackSealion.setNumSpots(Integer.parseInt(txtfOption.getText()));
 					trackSealion.animalTracker.setLatitude(lat);
 					trackSealion.animalTracker.setLogitude(lon);
+					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
 					
 				}
 				else if(animal == "Walrus"){
@@ -357,10 +368,15 @@ public class gui {
 					trackWalrus.setDentalHealth(txtfOption.getText());
 					trackWalrus.animalTracker.setLatitude(lat);
 					trackWalrus.animalTracker.setLogitude(lon);
+					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
 					
 				}
 				
 				//needs to save the current animal to a file
+				
+				
+				
+				
 				
 				JOptionPane.showMessageDialog(null, "Track Has Been Saved");
 				
@@ -379,6 +395,29 @@ public class gui {
 		btnSaveTrack.setFont(new Font("Source Sans Pro", Font.PLAIN, 18));
 		btnSaveTrack.setBounds(249, 489, 174, 41);
 		panelAddProperties.add(btnSaveTrack);
+	}
+	
+	
+	public void saveFile(String species, String sex, String weight, String option, double[] lat, double[] lon){
+		
+		Writer writer = null;
+
+		try {
+		    writer = new BufferedWriter(new OutputStreamWriter(
+		          new FileOutputStream("tracks/Track"+String.valueOf(count)+".txt"), "utf-8"));
+		    writer.write("Species: "+species );
+		    writer.write("Sex: "+sex);
+		    writer.write("Weight: "+weight);
+		    writer.write("Option: "+option);
+		    writer.write("coordinates: "+lat[0]+", "+lon[0]+" / "+lat[1]+", "+lon[1]+" / "+lat[2]+", "+lon[2]);
+		} catch (IOException ex) {
+		  // report
+		} finally {
+		   try {writer.close();} catch (Exception ex) {}
+		}
+		
+		count++;
+		
 	}
 	
 	public boolean validate(String input) {
