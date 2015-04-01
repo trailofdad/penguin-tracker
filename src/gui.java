@@ -23,16 +23,21 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 
 
 public class gui {
 	
-	private int count = 1;
+	private int count = 0;
+	private ArrayList<String> fileNames;
 	
 	private Penguin trackPenguin = new Penguin();
 	private Sealion trackSealion = new Sealion();
@@ -58,7 +63,6 @@ public class gui {
 	private JButton btnLoadTrack = new JButton("Load Track");
 	private JPanel panelTracks = new JPanel();
 	private JLabel lblChoose = new JLabel("Select a Track:");
-	private JList lstSelectTrack = new JList();
 	private JTextArea txtaProperties = new JTextArea();
 	private JLabel lblProperties = new JLabel("Properties:");
 	private JSeparator separator_1 = new JSeparator();
@@ -76,6 +80,7 @@ public class gui {
 	private JLabel lblLong = new JLabel("Long:");
 	private JLabel lblEnterSets = new JLabel("Enter 3 sets of coordinates (for testing only):");
 	private JButton btnSaveTrack = new JButton("Save Track");
+	private JComboBox<String> cbxSelectTrack = new JComboBox();
 
 	/**
 	 * Launch the application.
@@ -182,10 +187,6 @@ public class gui {
 		panelTracks.add(lblChoose);
 		
 		
-		lstSelectTrack.setBounds(262, 26, 302, 187);
-		panelTracks.add(lstSelectTrack);
-		
-		
 		txtaProperties.setBounds(262, 283, 302, 168);
 		panelTracks.add(txtaProperties);
 		
@@ -211,6 +212,39 @@ public class gui {
 		btnBack.setFont(new Font("Source Sans Pro", Font.PLAIN, 18));
 		btnBack.setBounds(253, 478, 174, 41);
 		panelTracks.add(btnBack);
+		cbxSelectTrack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				  try(BufferedReader br = new BufferedReader(new FileReader("tracks/"+(String) cbxSelectTrack.getSelectedItem()))) {
+				        StringBuilder sb = new StringBuilder();
+				        String line = br.readLine();
+
+				        while (line != null) {
+				            sb.append(line);
+				            sb.append(System.lineSeparator());
+				            line = br.readLine();
+				        }
+				        String everything = sb.toString();
+				        txtaProperties.setText(everything);
+				    
+				  } 
+				  
+				  catch (FileNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				
+				
+			}
+		});
+		
+		
+		cbxSelectTrack.setBounds(262, 27, 302, 35);
+		panelTracks.add(cbxSelectTrack);
 		
 		
 		frame.getContentPane().add(panelAnimalSelect, "name_693423592387237");
@@ -233,6 +267,16 @@ public class gui {
 				panelAnimalSelect.setVisible(false);
 				panelAddProperties.setVisible(true);
 				panelHome.setVisible(false);
+				
+				txtfSex.setText("");
+				txtfWeight.setText("");
+				txtfOption.setText("");
+				txtfLat1.setText("");
+				txtfLat2.setText("");
+				txtfLat0.setText("");
+				txtfLong0.setText("");
+				txtfLong1.setText("");
+				txtfLong2.setText("");
 				
 				String animal = cbxAnimalType.getSelectedItem().toString();
 				
@@ -372,8 +416,6 @@ public class gui {
 					
 				}
 				
-				//needs to save the current animal to a file
-				
 				
 				
 				
@@ -416,6 +458,11 @@ public class gui {
 		   try {writer.close();} catch (Exception ex) {}
 		}
 		
+//		fileNames.add("Track"+String.valueOf(count)+".txt");
+		
+		cbxSelectTrack.addItem("Track"+String.valueOf(count)+".txt");
+		
+		
 		count++;
 		
 	}
@@ -428,5 +475,4 @@ public class gui {
 		return false;
 		
 	}
-	
 }
