@@ -14,5 +14,5 @@
 * Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.
 * <del>Add validation for coordinates</del>
 * <del>fix up class'</del>
-* fix class diagram before submitting
-* re-check the rubric
+* <del>fix class diagram before submitting</del>
+* <del>re-check the rubric</del>

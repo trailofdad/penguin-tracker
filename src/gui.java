@@ -58,7 +58,7 @@ public class gui {
 	private JTextField txtfLat2;
 	private JTextField txtfLong2;
 	private JPanel panelSplash = new JPanel();
-	private JLabel lblHeader = new JLabel("Penguin Tracker v0.1");
+	private JLabel lblHeader = new JLabel("Penguin Tracker v1.0");
 	private JLabel lblPenguinImg = new JLabel((Icon) null);
 	private JButton btnStartTracking = new JButton("Start Tracking");
 	private JPanel panelHome = new JPanel();
