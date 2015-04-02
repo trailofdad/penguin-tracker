@@ -455,7 +455,7 @@ public class gui {
 		String weight = txtfWeight.getText();
 		
 		// Validation goes here for forms
-		if(validateString(sex) == true && isDouble(weight)) {
+		if(validateString(sex) == true && isDouble(weight) == true && validateCoord(txtfLat0.getText()) == true && validateCoord(txtfLat1.getText()) == true && validateCoord(txtfLat2.getText()) == true && validateCoord(txtfLong0.getText()) == true && validateCoord(txtfLong1.getText()) == true && validateCoord(txtfLong2.getText()) == true) {
 			
 		
 		
@@ -520,13 +520,13 @@ public class gui {
 	
 	public boolean validateCoord(String input) {
 		
-		String regex = "[a-zA-Z0-9]\\w*";
+		String regex = "^-?([0-9]{0,3})(\\.[0-9]{1,6})?$";
 
 		if (input.matches(regex)) {
 		    return true;
 		}
 		
-		JOptionPane.showMessageDialog(null, "String not valid!");
+		JOptionPane.showMessageDialog(null, "Coordinates not valid!");
 		return false;
 		
 	}

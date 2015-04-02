@@ -1,5 +1,5 @@
-Species: Penguin
+Species: Walrus
 Sex: male
 Weight: 56
-Option: 70
-coordinates: 872634, 876234 / 876234, 876234 / 876234, 876234
+Option: good
+coordinates: 56.564536, 37.564736 / 56.473678, 64.567765 / 36.987987, 36.765765
