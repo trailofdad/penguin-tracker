@@ -3,6 +3,7 @@ public class Sealion extends Animal{
 
 	int numSpots;
 	
+	// multi-parameter constructor
 	Sealion() {
 		species = "Sea Lion";
 		numSpots = 0;

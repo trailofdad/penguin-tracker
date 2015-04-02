@@ -36,12 +36,16 @@ import java.util.ArrayList;
 
 public class gui {
 	
+	//counter for filenames
 	private int count = 0;
 	
+	//Create instances of the animals
 	private Penguin trackPenguin = new Penguin();
 	private Sealion trackSealion = new Sealion();
 	private Walrus trackWalrus = new Walrus();
 
+	
+	//instantiate UI components
 	private ImageIcon penguin = new ImageIcon("src/penguin.png");
 	private JFrame frame;
 	private JTextField txtfSex;
@@ -247,8 +251,10 @@ public class gui {
 				panelAddProperties.setVisible(true);
 				panelHome.setVisible(false);
 				
+				//clears form
 				clearForm();
 				
+				//sets the third property based on the animal selected
 				setOption();
 				
 				
@@ -339,6 +345,7 @@ public class gui {
 		btnSaveTrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//sets the animal properties in the instanced animal object
 				setProperties();			
 				
 				
@@ -493,7 +500,8 @@ public class gui {
 			JOptionPane.showMessageDialog(null, "validation issue!");
 		}
 	}
-	
+		
+	//checks if the input is a double
 	private boolean isDouble(String weight) {
 		 try {
 		        Double.parseDouble(weight);
@@ -504,7 +512,8 @@ public class gui {
 		    }
 		
 	}
-
+	
+	//validation for a basic string
 	public boolean validateString(String input) {
 		
 		String regex = "[a-zA-Z0-9]\\w*";
@@ -518,6 +527,7 @@ public class gui {
 		
 	}
 	
+	//coordinate validation using regex
 	public boolean validateCoord(String input) {
 		
 		String regex = "[a-zA-Z0-9]\\w*";

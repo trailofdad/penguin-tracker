@@ -3,6 +3,7 @@ public class Walrus extends Animal{
 	
 	String dentalHealth;
 	
+	// multi-parameter constructor
 	Walrus(){
 		species = "Walrus";
 		dentalHealth = "good";

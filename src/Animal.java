@@ -1,19 +1,21 @@
 
 public abstract class Animal {
+	
 	//properties
 	String species = "species";
 	String sex = "sex";
 	double weight = 0;
 	
+	//instanced tracker class
 	Tracker animalTracker = new Tracker();
 	
+	//Method to inherit for adding coordinates
 	public void addCoords(String[] lat,String[] lon) {
 		
 		this.animalTracker.setLatitude(lat);
-		this.animalTracker.setLogitude(lon);
+		this.animalTracker.setLongitude(lon);
 	}
-	
-	
+		
 
 	public String getSpecies() {
 		return species;
