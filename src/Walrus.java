@@ -1,16 +1,11 @@
 
 public class Walrus extends Animal{
 	
-	String dentalHealth = "Good";
+	String dentalHealth;
 	
 	Walrus(){
 		species = "Walrus";
-	}
-	
-	@Override
-	public void newTrack() {
-		Walrus myWalrus = new Walrus();
-		
+		dentalHealth = "good";
 	}
 
 	public String getDentalHealth() {

@@ -467,7 +467,7 @@ public class gui {
 			trackPenguin.setWeight(Double.parseDouble(weight));
 			trackPenguin.setBloodPressure(Double.parseDouble(txtfOption.getText()));
 			trackPenguin.animalTracker.setLatitude(lat);
-			trackPenguin.animalTracker.setLogitude(lon);
+			trackPenguin.animalTracker.setLongitude(lon);
 			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
 		}
 		else if(animal == "Sea Lion"){
@@ -475,7 +475,7 @@ public class gui {
 			trackSealion.setWeight(Double.parseDouble(weight));
 			trackSealion.setNumSpots(Integer.parseInt(txtfOption.getText()));
 			trackSealion.animalTracker.setLatitude(lat);
-			trackSealion.animalTracker.setLogitude(lon);
+			trackSealion.animalTracker.setLongitude(lon);
 			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
 			
 		}
@@ -484,7 +484,7 @@ public class gui {
 			trackWalrus.setWeight(Double.parseDouble(weight));
 			trackWalrus.setDentalHealth(txtfOption.getText());
 			trackWalrus.animalTracker.setLatitude(lat);
-			trackWalrus.animalTracker.setLogitude(lon);
+			trackWalrus.animalTracker.setLongitude(lon);
 			saveFile(animal, sex, weight, txtfOption.getText(), lat, lon);
 			
 		}

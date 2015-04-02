@@ -14,7 +14,6 @@ public abstract class Animal {
 	}
 	
 	
-	public abstract void newTrack();
 
 	public String getSpecies() {
 		return species;

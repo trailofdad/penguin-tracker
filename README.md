@@ -12,7 +12,7 @@
 * <del>Implementation of exception handling (i.e. try/catch)<del>
 * <del>Uses a multi-parameter constructor to populate the properties of each animal type using data taken from the UI at runtime</del>
 * Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.
-* Add validation for coordinates
-* fix up class'
+* <del>Add validation for coordinates</del>
+* <del>fix up class'</del>
 * fix class diagram before submitting
 * re-check the rubric

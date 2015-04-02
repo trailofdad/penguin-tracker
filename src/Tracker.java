@@ -2,15 +2,14 @@
 public class Tracker {
 	
 	//properties
-	String[] logitude = {"0", "0", "0"};
+	String[] longitude = {"0", "0", "0"};
 	String[] latitude = {"0", "0", "0"};
-	int count = 0;
 	
-	public String[] getLogitude() {
-		return logitude;
+	public String[] getLongitude() {
+		return longitude;
 	}
-	public void setLogitude(String[] logitude) {
-		this.logitude = logitude;
+	public void setLongitude(String[] logitude) {
+		this.longitude = logitude;
 	}
 	public String[] getLatitude() {
 		return latitude;
