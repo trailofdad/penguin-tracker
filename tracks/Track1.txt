@@ -1,5 +1,5 @@
 Species: Walrus
-Sex: female 
-Weight: 56.0
+Sex: female
+Weight: 70
 Option: good
-coordinates: 872634.0, 872364.0 / 872634.0, 872634.0 / 876234.0, 72634.0
+coordinates: 876345876, 876234 / 87634, 876234 / 876234, 872634

@@ -1,0 +1,5 @@
+Species: Sea Lion
+Sex: female
+Weight: 80
+Option: 100
+coordinates: 876234, 872634 / 876234, 876234 / 876234, 876234

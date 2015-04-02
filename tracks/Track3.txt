@@ -1,0 +1,5 @@
+Species: Penguin
+Sex: male
+Weight: 90000000000
+Option: 73
+coordinates: 87123, 98712 / 9872134, 987234 / 987234, 987234

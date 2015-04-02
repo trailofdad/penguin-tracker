@@ -71,8 +71,8 @@ public class gui {
 	private JComboBox cbxAnimalType = new JComboBox();
 	private JButton btnCreateTrack = new JButton("Create Track");
 	private JPanel panelAddProperties = new JPanel();
-	private JLabel lblSex = new JLabel("Sex:");
-	private JLabel lblWeight = new JLabel("Weight:");
+	private JLabel lblSex = new JLabel("Sex (male/female):");
+	private JLabel lblWeight = new JLabel("Weight (lbs):");
 	private JLabel lblOption = new JLabel("Blood Pressure:");
 	private JSeparator separator = new JSeparator();
 	private JLabel lblLat = new JLabel("Lat:");
@@ -265,15 +265,15 @@ public class gui {
 		panelAddProperties.setLayout(null);		
 		
 		lblSex.setFont(new Font("Source Sans Pro", Font.PLAIN, 20));
-		lblSex.setBounds(124, 42, 115, 32);
+		lblSex.setBounds(42, 42, 239, 32);
 		panelAddProperties.add(lblSex);		
 		
 		lblWeight.setFont(new Font("Source Sans Pro", Font.PLAIN, 20));
-		lblWeight.setBounds(124, 97, 71, 26);
+		lblWeight.setBounds(42, 97, 239, 26);
 		panelAddProperties.add(lblWeight);		
 		
 		lblOption.setFont(new Font("Source Sans Pro", Font.PLAIN, 20));
-		lblOption.setBounds(124, 152, 142, 26);
+		lblOption.setBounds(42, 152, 224, 26);
 		panelAddProperties.add(lblOption);
 		
 		txtfSex = new JTextField();
@@ -360,7 +360,7 @@ public class gui {
 	}
 	
 	
-	public void saveFile(String species, String sex, String weight, String option, double[] lat, double[] lon){
+	public void saveFile(String species, String sex, String weight, String option, String[] lat, String[] lon){
 		
 		Writer writer = null;
 
@@ -408,15 +408,15 @@ public class gui {
 		
 		if(animal == "Penguin"){
 			
-			lblOption.setText("Blood Pressure:");
+			lblOption.setText("Blood Pressure(##.#):");
 		}
 		else if(animal == "Sea Lion"){
 			
-			lblOption.setText("# of Spots:");
+			lblOption.setText("# of Spots (Integer):");
 		}
 		else if(animal == "Walrus"){
 			
-			lblOption.setText("Dental Health:");
+			lblOption.setText("Dental Health (good/avg/poor):");
 		}
 	}
 	
@@ -452,16 +452,19 @@ public class gui {
 	public void setProperties() {
 		String animal = cbxAnimalType.getSelectedItem().toString();
 		String sex = txtfSex.getText();
-		double weight = Double.parseDouble(txtfWeight.getText());
+		String weight = txtfWeight.getText();
 		
 		// Validation goes here for forms
+		if(validateString(sex) == true && isDouble(weight)) {
+			
 		
-		double[] lat = {Double.parseDouble(txtfLat0.getText()), Double.parseDouble(txtfLat1.getText()), Double.parseDouble(txtfLat2.getText())};
-		double[] lon = {Double.parseDouble(txtfLong0.getText()), Double.parseDouble(txtfLong1.getText()), Double.parseDouble(txtfLong2.getText())};
+		
+		String[] lat = {txtfLat0.getText(), txtfLat1.getText(), txtfLat2.getText()};
+		String[] lon = {txtfLong0.getText(), txtfLong1.getText(), txtfLong2.getText()};
 		
 		if(animal == "Penguin"){
 			trackPenguin.setSex(sex);
-			trackPenguin.setWeight(weight);
+			trackPenguin.setWeight(Double.parseDouble(weight));
 			trackPenguin.setBloodPressure(Double.parseDouble(txtfOption.getText()));
 			trackPenguin.animalTracker.setLatitude(lat);
 			trackPenguin.animalTracker.setLogitude(lon);
@@ -469,7 +472,7 @@ public class gui {
 		}
 		else if(animal == "Sea Lion"){
 			trackSealion.setSex(sex);
-			trackSealion.setWeight(weight);
+			trackSealion.setWeight(Double.parseDouble(weight));
 			trackSealion.setNumSpots(Integer.parseInt(txtfOption.getText()));
 			trackSealion.animalTracker.setLatitude(lat);
 			trackSealion.animalTracker.setLogitude(lon);
@@ -478,15 +481,30 @@ public class gui {
 		}
 		else if(animal == "Walrus"){
 			trackWalrus.setSex(sex);
-			trackWalrus.setWeight(weight);
+			trackWalrus.setWeight(Double.parseDouble(weight));
 			trackWalrus.setDentalHealth(txtfOption.getText());
 			trackWalrus.animalTracker.setLatitude(lat);
 			trackWalrus.animalTracker.setLogitude(lon);
-			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
+			saveFile(animal, sex, weight, txtfOption.getText(), lat, lon);
 			
+		}
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "validation issue!");
 		}
 	}
 	
+	private boolean isDouble(String weight) {
+		 try {
+		        Double.parseDouble(weight);
+		        return true;
+		    } catch (NumberFormatException e) {
+		    	JOptionPane.showMessageDialog(null, "Double not double!");
+		    	return false;
+		    }
+		
+	}
+
 	public boolean validateString(String input) {
 		
 		String regex = "[a-zA-Z0-9]\\w*";
@@ -495,6 +513,20 @@ public class gui {
 		    return true;
 		}
 		
+		JOptionPane.showMessageDialog(null, "String not valid!");
+		return false;
+		
+	}
+	
+	public boolean validateCoord(String input) {
+		
+		String regex = "[a-zA-Z0-9]\\w*";
+
+		if (input.matches(regex)) {
+		    return true;
+		}
+		
+		JOptionPane.showMessageDialog(null, "String not valid!");
 		return false;
 		
 	}

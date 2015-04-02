@@ -7,7 +7,7 @@ public abstract class Animal {
 	
 	Tracker animalTracker = new Tracker();
 	
-	public void addCoords(double[] lat,double[] lon) {
+	public void addCoords(String[] lat,String[] lon) {
 		
 		this.animalTracker.setLatitude(lat);
 		this.animalTracker.setLogitude(lon);

@@ -1,0 +1,5 @@
+Species: Walrus
+Sex: male
+Weight: 56
+Option: good
+coordinates: kjsdf, kjsdf / kjndwsf, kjnesdf / kjnwd, kjnsddf
