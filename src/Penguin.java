@@ -1,4 +1,6 @@
 
+
+
 public class Penguin extends Animal{
 	
 	double bloodPressure = 0;
@@ -26,6 +28,10 @@ public class Penguin extends Animal{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
 
 	
 }

@@ -13,6 +13,7 @@ public abstract class Animal {
 		this.animalTracker.setLogitude(lon);
 	}
 	
+	
 	public abstract void newTrack();
 
 	public String getSpecies() {

@@ -37,7 +37,6 @@ import java.util.ArrayList;
 public class gui {
 	
 	private int count = 0;
-	private ArrayList<String> fileNames;
 	
 	private Penguin trackPenguin = new Penguin();
 	private Sealion trackSealion = new Sealion();
@@ -55,7 +54,7 @@ public class gui {
 	private JTextField txtfLat2;
 	private JTextField txtfLong2;
 	private JPanel panelSplash = new JPanel();
-	private JLabel lblHeader = new JLabel("Penguin Tracker v0.01");
+	private JLabel lblHeader = new JLabel("Penguin Tracker v0.1");
 	private JLabel lblPenguinImg = new JLabel((Icon) null);
 	private JButton btnStartTracking = new JButton("Start Tracking");
 	private JPanel panelHome = new JPanel();
@@ -185,6 +184,8 @@ public class gui {
 		lblChoose.setFont(new Font("Source Sans Pro", Font.PLAIN, 20));
 		lblChoose.setBounds(70, 26, 138, 35);
 		panelTracks.add(lblChoose);
+		txtaProperties.setWrapStyleWord(true);
+		txtaProperties.setLineWrap(true);
 		
 		
 		txtaProperties.setBounds(262, 283, 302, 168);
@@ -215,29 +216,7 @@ public class gui {
 		cbxSelectTrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				  try(BufferedReader br = new BufferedReader(new FileReader("tracks/"+(String) cbxSelectTrack.getSelectedItem()))) {
-				        StringBuilder sb = new StringBuilder();
-				        String line = br.readLine();
-
-				        while (line != null) {
-				            sb.append(line);
-				            sb.append(System.lineSeparator());
-				            line = br.readLine();
-				        }
-				        String everything = sb.toString();
-				        txtaProperties.setText(everything);
-				    
-				  } 
-				  
-				  catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				
-				
+				 readFile();				
 				
 			}
 		});
@@ -268,30 +247,10 @@ public class gui {
 				panelAddProperties.setVisible(true);
 				panelHome.setVisible(false);
 				
-				txtfSex.setText("");
-				txtfWeight.setText("");
-				txtfOption.setText("");
-				txtfLat1.setText("");
-				txtfLat2.setText("");
-				txtfLat0.setText("");
-				txtfLong0.setText("");
-				txtfLong1.setText("");
-				txtfLong2.setText("");
+				clearForm();
 				
-				String animal = cbxAnimalType.getSelectedItem().toString();
+				setOption();
 				
-				if(animal == "Penguin"){
-					
-					lblOption.setText("Blood Pressure:");
-				}
-				else if(animal == "Sea Lion"){
-					
-					lblOption.setText("# of Spots:");
-				}
-				else if(animal == "Walrus"){
-					
-					lblOption.setText("Dental Health:");
-				}
 				
 			}
 		});
@@ -380,47 +339,8 @@ public class gui {
 		btnSaveTrack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				String animal = cbxAnimalType.getSelectedItem().toString();
-				String sex = txtfSex.getText();
-				double weight = Double.parseDouble(txtfWeight.getText());
+				setProperties();			
 				
-				// Validation goes here for forms
-				
-				double[] lat = {Double.parseDouble(txtfLat0.getText()), Double.parseDouble(txtfLat1.getText()), Double.parseDouble(txtfLat2.getText())};
-				double[] lon = {Double.parseDouble(txtfLong0.getText()), Double.parseDouble(txtfLong1.getText()), Double.parseDouble(txtfLong2.getText())};
-				
-				if(animal == "Penguin"){
-					trackPenguin.setSex(sex);
-					trackPenguin.setWeight(weight);
-					trackPenguin.setBloodPressure(Double.parseDouble(txtfOption.getText()));
-					trackPenguin.animalTracker.setLatitude(lat);
-					trackPenguin.animalTracker.setLogitude(lon);
-					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
-				}
-				else if(animal == "Sea Lion"){
-					trackSealion.setSex(sex);
-					trackSealion.setWeight(weight);
-					trackSealion.setNumSpots(Integer.parseInt(txtfOption.getText()));
-					trackSealion.animalTracker.setLatitude(lat);
-					trackSealion.animalTracker.setLogitude(lon);
-					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
-					
-				}
-				else if(animal == "Walrus"){
-					trackWalrus.setSex(sex);
-					trackWalrus.setWeight(weight);
-					trackWalrus.setDentalHealth(txtfOption.getText());
-					trackWalrus.animalTracker.setLatitude(lat);
-					trackWalrus.animalTracker.setLogitude(lon);
-					saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
-					
-				}
-				
-				
-				
-				
-				
-				JOptionPane.showMessageDialog(null, "Track Has Been Saved");
 				
 				panelSplash.setVisible(false);
 				panelTracks.setVisible(false);
@@ -447,18 +367,22 @@ public class gui {
 		try {
 		    writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream("tracks/Track"+String.valueOf(count)+".txt"), "utf-8"));
-		    writer.write("Species: "+species );
+		    writer.write("Species: "+species);
+		    ((BufferedWriter) writer).newLine();
 		    writer.write("Sex: "+sex);
+		    ((BufferedWriter) writer).newLine();
 		    writer.write("Weight: "+weight);
+		    ((BufferedWriter) writer).newLine();
 		    writer.write("Option: "+option);
+		    ((BufferedWriter) writer).newLine();
 		    writer.write("coordinates: "+lat[0]+", "+lon[0]+" / "+lat[1]+", "+lon[1]+" / "+lat[2]+", "+lon[2]);
+		    JOptionPane.showMessageDialog(null, "Track " +String.valueOf(count) +" Has Been Saved. Write this track number down.");
 		} catch (IOException ex) {
 		  // report
 		} finally {
 		   try {writer.close();} catch (Exception ex) {}
 		}
 		
-//		fileNames.add("Track"+String.valueOf(count)+".txt");
 		
 		cbxSelectTrack.addItem("Track"+String.valueOf(count)+".txt");
 		
@@ -467,12 +391,112 @@ public class gui {
 		
 	}
 	
-	public boolean validate(String input) {
+	public void clearForm(){
+		txtfSex.setText("");
+		txtfWeight.setText("");
+		txtfOption.setText("");
+		txtfLat1.setText("");
+		txtfLat2.setText("");
+		txtfLat0.setText("");
+		txtfLong0.setText("");
+		txtfLong1.setText("");
+		txtfLong2.setText("");
+	}
+	
+	public void setOption(){
+		String animal = cbxAnimalType.getSelectedItem().toString();
 		
+		if(animal == "Penguin"){
+			
+			lblOption.setText("Blood Pressure:");
+		}
+		else if(animal == "Sea Lion"){
+			
+			lblOption.setText("# of Spots:");
+		}
+		else if(animal == "Walrus"){
+			
+			lblOption.setText("Dental Health:");
+		}
+	}
+	
+	
+	//READ FILE METHOD
+	//reads the file and sets the text to a variables, which gets set to text area "Properties"
+	public void readFile(){
+		 try(BufferedReader br = new BufferedReader(new FileReader("tracks/"+(String) cbxSelectTrack.getSelectedItem()))) {
+		        StringBuilder sb = new StringBuilder();
+		        String line = br.readLine();
+
+		        while (line != null) {
+		            sb.append(line);
+		            sb.append(System.lineSeparator());
+		            line = br.readLine();
+		        }
+		        String everything = sb.toString();
+		        txtaProperties.setText(everything);
+		    
+		  } 
+		  
+		  catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	//SET PROPERTIES METHOD
+	//set the properties input based on animal selection
+	public void setProperties() {
+		String animal = cbxAnimalType.getSelectedItem().toString();
+		String sex = txtfSex.getText();
+		double weight = Double.parseDouble(txtfWeight.getText());
 		
+		// Validation goes here for forms
 		
+		double[] lat = {Double.parseDouble(txtfLat0.getText()), Double.parseDouble(txtfLat1.getText()), Double.parseDouble(txtfLat2.getText())};
+		double[] lon = {Double.parseDouble(txtfLong0.getText()), Double.parseDouble(txtfLong1.getText()), Double.parseDouble(txtfLong2.getText())};
+		
+		if(animal == "Penguin"){
+			trackPenguin.setSex(sex);
+			trackPenguin.setWeight(weight);
+			trackPenguin.setBloodPressure(Double.parseDouble(txtfOption.getText()));
+			trackPenguin.animalTracker.setLatitude(lat);
+			trackPenguin.animalTracker.setLogitude(lon);
+			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
+		}
+		else if(animal == "Sea Lion"){
+			trackSealion.setSex(sex);
+			trackSealion.setWeight(weight);
+			trackSealion.setNumSpots(Integer.parseInt(txtfOption.getText()));
+			trackSealion.animalTracker.setLatitude(lat);
+			trackSealion.animalTracker.setLogitude(lon);
+			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
+			
+		}
+		else if(animal == "Walrus"){
+			trackWalrus.setSex(sex);
+			trackWalrus.setWeight(weight);
+			trackWalrus.setDentalHealth(txtfOption.getText());
+			trackWalrus.animalTracker.setLatitude(lat);
+			trackWalrus.animalTracker.setLogitude(lon);
+			saveFile(animal, sex, String.valueOf(weight), txtfOption.getText(), lat, lon);
+			
+		}
+	}
+	
+	public boolean validateString(String input) {
+		
+		String regex = "[a-zA-Z0-9]\\w*";
+
+		if (input.matches(regex)) {
+		    return true;
+		}
 		
 		return false;
 		
 	}
+
 }

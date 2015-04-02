@@ -21,4 +21,6 @@ public class Sealion extends Animal{
 		this.numSpots = numSpots;
 	}
 
+
+
 }
