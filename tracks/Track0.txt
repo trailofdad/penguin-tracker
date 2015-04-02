@@ -1,0 +1,5 @@
+Species: Sea Lion
+Sex: male
+Weight: 54.0
+Option: 76
+coordinates: 8723.0, 876324.0 / 876234.0, 876234.0 / 876234.0, 87634.0

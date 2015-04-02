@@ -20,7 +20,6 @@ public class Walrus extends Animal{
 	public void setDentalHealth(String dentalHealth) {
 		this.dentalHealth = dentalHealth;
 	}
-
 	
 	
 }
