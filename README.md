@@ -11,7 +11,7 @@
 * <del>Use of Aggregation, Inheritance, Abstraction</del>
 * <del>Implementation of exception handling (i.e. try/catch)<del>
 * <del>Uses a multi-parameter constructor to populate the properties of each animal type using data taken from the UI at runtime</del>
-* Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.
+* <del>Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.</del>
 * <del>Add validation for coordinates</del>
 * <del>fix up class'</del>
 * <del>fix class diagram before submitting</del>
