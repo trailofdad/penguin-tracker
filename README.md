@@ -14,3 +14,5 @@
 * Code is well commented as to functionality, structures, formulas, etc. Formatting and layout of source code is consistent.
 * Add validation for coordinates
 * fix up class'
+* fix class diagram before submitting
+* re-check the rubric
